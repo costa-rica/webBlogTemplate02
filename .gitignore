@@ -1,3 +1,4 @@
 __pycache__/
 .DS_Store
-*.txt
+temporary_file_for_path_name.txt
+temporary_file_for_path.txt
