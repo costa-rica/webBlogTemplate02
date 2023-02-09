@@ -1,0 +1,98 @@
+{% extends "_layout.html" %}
+{% block main %}
+<form method="POST" id="form01" enctype=multipart/form-data></form>
+
+<section class="main">
+  <div class="home_page">
+    <div class="title">
+      <h1>Home</h1>
+    </div>
+    
+    <div class="home_sub">
+
+      <div class="std_framing">
+        This page is an example of how to make a blog page where you:
+        upload word documents as the blog post
+        save them as .html files
+        and seamlessly insert them into your blog format
+        save the blogpost/word doc in your static folder
+      </div>
+
+
+
+      <div class="post_blog std_framing">
+        <h2>Post Blog Word document</h2>
+        <input type="text" class="form-control" placeholder="Enter title" form="form01" name="title">
+        <br>
+
+        Upload MS Word document saved as html:
+        <input class="form-control" type="file" form="form01" name="word_doc_upload" 
+        accept=".html"
+        placeholder=".html">
+
+        Upload .zip file of images that belong to html file above:
+        <input class="form-control" type="file" form="form01" name="folder_images" 
+        accept=".zip"
+        placeholder="if any images from a .zip">
+
+
+
+        <div class="btn_right">
+<button type="submit" class="btn btn-primary" form="form01">Submit</button>
+        </div>
+        
+
+      </div>
+
+      <div class="blog_table std_framing">
+
+        <div class="table_super post_table_super">
+          <div class="table_custom ">
+            <table id="postsTable" class="display table nowrap responsive">
+              <thead>
+                <tr>
+                  
+                  <th>Post ID</th>
+                  <th>Title</th>
+                  <th>View</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for post in posts_list %}
+                <tr>
+                  <td>{{ post.id }}</td>
+                  <td>{{ post.title }}</td>
+                  <td>
+                    <button name="view" form="form01" type="submit" value="{{ post.id }}" class="btn btn-info">View</button>
+                  </td>
+                  <td>
+                    <button name="delete" form="form01" type="submit" value="{{ post.id }}" class="delete_button btn btn-danger">Delete</button>
+                  </td>
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div><!-- post_table_super -->
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+</section>
+
+
+<script type="text/javascript">
+  $(document).ready( function () {
+      $('#postsTable').DataTable();
+  } );
+</script>
+
+{% endblock %}
